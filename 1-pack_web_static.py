@@ -1,29 +1,16 @@
 #!/usr/bin/python3
-"""
-Generates a .tgz archive for content in web_static.
-"""
-
+"""Create funtion for generate tgz file."""
 from fabric.api import local
-from datetime import datetime
-from os.path import isdir
+import time
 
 
 def do_pack():
-    """
-    Create a pack for web_static.
-    """
-
+    """Gerenate tgz."""
+    timestamp = time.strftime("%Y%m%d%H%M%S")
     try:
-        time = datetime.now()
-        if not isdir("versions"):
-            local("mkdir -p versions")
-
-        _path = "web_static_{}{}{}{}{}{}.tgz".format(time.year, time.month,
-                                                     time.day, time.hour,
-                                                     time.minute, time.second)
-
-        local("tar -cvzf versions/{} web_static/".format(_path))
+        local("mkdir -p versions")
+        local("tar -cvzf versions/web_static_{:s}.tgz web_static/".
+              format(timestamp))
+        return ("versions/web_static_{:s}.tgz".format(timestamp))
     except:
-        _path = None
-
-    return _path
+        return None
