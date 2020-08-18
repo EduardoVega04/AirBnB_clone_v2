@@ -9,8 +9,8 @@ from datetime import datetime
 from os.path import exists, isdir
 
 env.hosts = [
-    '35.229.108.128',
-    '107.21.161.159'
+    '35.237.233.239',
+    '54.235.2.72'
 ]
 
 
